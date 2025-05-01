@@ -8,7 +8,8 @@ void compute_interest_rate(void);
 
 int main(void) {
     // reverse_a_series_of_numbers();
-    check_a_number_for_repeated_digits();
+    // check_a_number_for_repeated_digits();
+    compute_interest_rate();
     return 0;
 }
 
@@ -52,7 +53,34 @@ void check_a_number_for_repeated_digits(void) {
 }
 
 void compute_interest_rate(void) {
-    
+    /*  prints a table of compound interest */
+    #define NUM_RATES ((int) (sizeof(value) / sizeof(value[0])))
+    #define INITIAL_BALANCE 100.00
+
+    int low_rate, num_years;
+
+    double value[5];
+
+    printf("Enter interest rate: ");
+    scanf("%d", &low_rate);
+    printf("Enter number of the years: ");
+    scanf("%d", &num_years);
+
+    printf("\nYears");
+    for(int i = 0; i < NUM_RATES; i++) {
+        printf("%6d%%", low_rate + i);
+        value[i] = INITIAL_BALANCE;
+    }
+    printf("\n");
+
+    for(int year = 1; year <= num_years; year++) {
+        printf("%3d    ", year);
+        for(int i = 0; i < NUM_RATES; i++) {
+            value[i] += (low_rate + i) / 100.0 * value[i];
+            printf("%7.2f", value[i]);
+        }
+        printf("\n");
+    }
 }
 
 void designated_array_initializers(void) {
